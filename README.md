@@ -8,7 +8,7 @@ An Objective-C library for debouncing NSTimers
 Put this in your Podfile and smoke it:
 
 ```ruby
-pod 'LVDebounce'
+pod 'LVDebounce', git: 'git@github.com:layervault/LVDebounce.git'
 ```
 
 ## Usage
