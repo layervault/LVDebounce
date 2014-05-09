@@ -10,6 +10,6 @@
 
 @interface LVDebounce : NSObject
 
-+ (void)fireAfter:(NSTimeInterval)seconds target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo;
++ (void)fireAfter:(NSTimeInterval)seconds target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo runLoop:(NSRunLoop *)runLoop;
 
 @end
