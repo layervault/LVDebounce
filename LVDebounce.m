@@ -18,7 +18,7 @@ static NSMutableDictionary *timers = nil;
     }
 }
 
-+ (void)fireAfter:(NSTimeInterval)seconds target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo {
++ (void)fireAfter:(NSTimeInterval)seconds target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo runLoop:(NSRunLoop *)runLoop {
     @synchronized(self) {
         NSArray *eventKey = @[target, NSStringFromSelector(aSelector)];
         if ([timers objectForKey:eventKey]) {
@@ -30,8 +30,14 @@ static NSMutableDictionary *timers = nil;
             [timers removeObjectForKey:eventKey];
         }
 
-        [timers setObject:[NSTimer scheduledTimerWithTimeInterval:seconds target:target selector:aSelector userInfo:userInfo repeats:NO]
-                   forKey:eventKey];
+        if(!runLoop){
+            runLoop = [NSRunLoop currentRunLoop];
+        }
+
+        NSTimer *timer = [NSTimer timerWithTimeInterval:seconds target:target selector:aSelector userInfo:userInfo repeats:NO];
+        [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
+
+        [timers setObject:timer forKey:eventKey];
     }
 }
 
