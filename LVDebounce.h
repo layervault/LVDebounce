@@ -12,4 +12,6 @@
 
 + (void)fireAfter:(NSTimeInterval)seconds target:(id)target selector:(SEL)aSelector userInfo:(id)userInfo;
 
++ (void)fireAfter:(NSTimeInterval)seconds target:(id)target selector:(SEL)aSelector withObject:(id)anArgument;
+
 @end
